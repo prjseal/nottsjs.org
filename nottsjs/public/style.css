@@ -1,0 +1,45 @@
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+svg.logo {
+  width: 40px;
+  height: 40px
+}
+
+svg.logo-small {
+  width: 20px;
+  height: 20px
+}
+
+.top-button {
+  margin: 5px;
+}
+
+.valign-middle {
+  vertical-align: middle;
+}
+
+address {
+  font-style: normal;
+}
+
+.scholarship-program-btn {
+  line-height: 2em;
+  height: auto;
+  text-decoration: none;
+}
+
+.sponsor-images img {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .sponsor-images img {
+    padding-top: inherit;
+    padding-bottom: inherit;
+  }
+}
