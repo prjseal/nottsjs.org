@@ -8,13 +8,16 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      site: '',
       name: '',
       links: [],
+      nodeid: 0,
+      content: {},
     }
   }
 
   componentDidMount() {
-    this.getAccessToken('api@mediamaker.co.uk', 'rwJTS$y*eN').then((token) => {
+    this.getAccessToken('setup@codeshare.co.uk', 'setup@codeshare.co.uk').then((token) => {
       this.getContent(token);
     })
   }
@@ -22,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Home name={this.state.name} />
+        <Home content={this.state.content} />
         {(Object.keys(this.state.links).map((item) => {
           debugger
           return (<Link src={this.state.links[item].href} caption='link text' />)
@@ -76,8 +79,10 @@ class App extends Component {
       return response.json();
     }).then((data) => {
       this.setState({
+        content: data._embedded.content["0"],
         name: data._embedded.content["0"].name,
         links: data._links,
+        nodeid: data._embedded.content["0"].id,
       });
     });
   }
