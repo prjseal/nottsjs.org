@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "1b4839b62f1e1d3a")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "44c7aa4b12a08136")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.5")]
 
 
 // FILE: models.generated.cs
@@ -66,12 +66,39 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
-		/// Logo: Choose the site logo
+		/// Sponsors: Enter the sponsors for the meetup
 		///</summary>
-		[ImplementPropertyType("logo")]
-		public IPublishedContent Logo
+		[ImplementPropertyType("sponsors")]
+		public IEnumerable<IPublishedContent> Sponsors
 		{
-			get { return Umbraco.Web.PublishedContentModels.HomeControls.GetLogo(this); }
+			get { return this.GetPropertyValue<IEnumerable<IPublishedContent>>("sponsors"); }
+		}
+
+		///<summary>
+		/// Address: Enter the address for the meetup
+		///</summary>
+		[ImplementPropertyType("address")]
+		public string Address
+		{
+			get { return Umbraco.Web.PublishedContentModels.HomeControls.GetAddress(this); }
+		}
+
+		///<summary>
+		/// Next Event Time: Enter the time for the next event
+		///</summary>
+		[ImplementPropertyType("nextEventTime")]
+		public string NextEventTime
+		{
+			get { return Umbraco.Web.PublishedContentModels.HomeControls.GetNextEventTime(this); }
+		}
+
+		///<summary>
+		/// Next Event Title: Enter the title for the next event
+		///</summary>
+		[ImplementPropertyType("nextEventTitle")]
+		public string NextEventTitle
+		{
+			get { return Umbraco.Web.PublishedContentModels.HomeControls.GetNextEventTitle(this); }
 		}
 	}
 
@@ -79,8 +106,14 @@ namespace Umbraco.Web.PublishedContentModels
 	/// <summary>Home Controls</summary>
 	public partial interface IHomeControls : IPublishedContent
 	{
-		/// <summary>Logo</summary>
-		IPublishedContent Logo { get; }
+		/// <summary>Address</summary>
+		string Address { get; }
+
+		/// <summary>Next Event Time</summary>
+		string NextEventTime { get; }
+
+		/// <summary>Next Event Title</summary>
+		string NextEventTitle { get; }
 	}
 
 	/// <summary>Home Controls</summary>
@@ -109,16 +142,451 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
-		/// Logo: Choose the site logo
+		/// Address: Enter the address for the meetup
 		///</summary>
-		[ImplementPropertyType("logo")]
-		public IPublishedContent Logo
+		[ImplementPropertyType("address")]
+		public string Address
 		{
-			get { return GetLogo(this); }
+			get { return GetAddress(this); }
 		}
 
-		/// <summary>Static getter for Logo</summary>
-		public static IPublishedContent GetLogo(IHomeControls that) { return that.GetPropertyValue<IPublishedContent>("logo"); }
+		/// <summary>Static getter for Address</summary>
+		public static string GetAddress(IHomeControls that) { return that.GetPropertyValue<string>("address"); }
+
+		///<summary>
+		/// Next Event Time: Enter the time for the next event
+		///</summary>
+		[ImplementPropertyType("nextEventTime")]
+		public string NextEventTime
+		{
+			get { return GetNextEventTime(this); }
+		}
+
+		/// <summary>Static getter for Next Event Time</summary>
+		public static string GetNextEventTime(IHomeControls that) { return that.GetPropertyValue<string>("nextEventTime"); }
+
+		///<summary>
+		/// Next Event Title: Enter the title for the next event
+		///</summary>
+		[ImplementPropertyType("nextEventTitle")]
+		public string NextEventTitle
+		{
+			get { return GetNextEventTitle(this); }
+		}
+
+		/// <summary>Static getter for Next Event Title</summary>
+		public static string GetNextEventTitle(IHomeControls that) { return that.GetPropertyValue<string>("nextEventTitle"); }
+	}
+
+	// Mixin content Type 1065 with alias "speakerControls"
+	/// <summary>Speaker Controls</summary>
+	public partial interface ISpeakerControls : IPublishedContent
+	{
+		/// <summary>Bio</summary>
+		string Bio { get; }
+
+		/// <summary>Image</summary>
+		IPublishedContent Image { get; }
+
+		/// <summary>Social Links</summary>
+		Umbraco.Web.Models.RelatedLinks SocialLinks { get; }
+	}
+
+	/// <summary>Speaker Controls</summary>
+	[PublishedContentModel("speakerControls")]
+	public partial class SpeakerControls : PublishedContentModel, ISpeakerControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "speakerControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public SpeakerControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<SpeakerControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Bio: Enter the bio for the speaker
+		///</summary>
+		[ImplementPropertyType("bio")]
+		public string Bio
+		{
+			get { return GetBio(this); }
+		}
+
+		/// <summary>Static getter for Bio</summary>
+		public static string GetBio(ISpeakerControls that) { return that.GetPropertyValue<string>("bio"); }
+
+		///<summary>
+		/// Image
+		///</summary>
+		[ImplementPropertyType("image")]
+		public IPublishedContent Image
+		{
+			get { return GetImage(this); }
+		}
+
+		/// <summary>Static getter for Image</summary>
+		public static IPublishedContent GetImage(ISpeakerControls that) { return that.GetPropertyValue<IPublishedContent>("image"); }
+
+		///<summary>
+		/// Social Links: Enter the social links for the speaker
+		///</summary>
+		[ImplementPropertyType("socialLinks")]
+		public Umbraco.Web.Models.RelatedLinks SocialLinks
+		{
+			get { return GetSocialLinks(this); }
+		}
+
+		/// <summary>Static getter for Social Links</summary>
+		public static Umbraco.Web.Models.RelatedLinks GetSocialLinks(ISpeakerControls that) { return that.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("socialLinks"); }
+	}
+
+	/// <summary>Speaker</summary>
+	[PublishedContentModel("speaker")]
+	public partial class Speaker : PublishedContentModel, ISpeakerControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "speaker";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public Speaker(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Speaker, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Bio: Enter the bio for the speaker
+		///</summary>
+		[ImplementPropertyType("bio")]
+		public string Bio
+		{
+			get { return Umbraco.Web.PublishedContentModels.SpeakerControls.GetBio(this); }
+		}
+
+		///<summary>
+		/// Image
+		///</summary>
+		[ImplementPropertyType("image")]
+		public IPublishedContent Image
+		{
+			get { return Umbraco.Web.PublishedContentModels.SpeakerControls.GetImage(this); }
+		}
+
+		///<summary>
+		/// Social Links: Enter the social links for the speaker
+		///</summary>
+		[ImplementPropertyType("socialLinks")]
+		public Umbraco.Web.Models.RelatedLinks SocialLinks
+		{
+			get { return Umbraco.Web.PublishedContentModels.SpeakerControls.GetSocialLinks(this); }
+		}
+	}
+
+	// Mixin content Type 1067 with alias "eventControls"
+	/// <summary>Event Controls</summary>
+	public partial interface IEventControls : IPublishedContent
+	{
+		/// <summary>End Date Time</summary>
+		DateTime EndDateTime { get; }
+
+		/// <summary>Meeting Content</summary>
+		IHtmlString MeetingContent { get; }
+
+		/// <summary>Meetup Url</summary>
+		string MeetupUrl { get; }
+
+		/// <summary>Speaker</summary>
+		IPublishedContent Speaker { get; }
+
+		/// <summary>Start Date Time</summary>
+		DateTime StartDateTime { get; }
+	}
+
+	/// <summary>Event Controls</summary>
+	[PublishedContentModel("eventControls")]
+	public partial class EventControls : PublishedContentModel, IEventControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "eventControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public EventControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<EventControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// End Date Time: Enter the end date time
+		///</summary>
+		[ImplementPropertyType("endDateTime")]
+		public DateTime EndDateTime
+		{
+			get { return GetEndDateTime(this); }
+		}
+
+		/// <summary>Static getter for End Date Time</summary>
+		public static DateTime GetEndDateTime(IEventControls that) { return that.GetPropertyValue<DateTime>("endDateTime"); }
+
+		///<summary>
+		/// Meeting Content: Enter the content for the meeting
+		///</summary>
+		[ImplementPropertyType("meetingContent")]
+		public IHtmlString MeetingContent
+		{
+			get { return GetMeetingContent(this); }
+		}
+
+		/// <summary>Static getter for Meeting Content</summary>
+		public static IHtmlString GetMeetingContent(IEventControls that) { return that.GetPropertyValue<IHtmlString>("meetingContent"); }
+
+		///<summary>
+		/// Meetup Url: Enter the url for the event on meetup
+		///</summary>
+		[ImplementPropertyType("meetupUrl")]
+		public string MeetupUrl
+		{
+			get { return GetMeetupUrl(this); }
+		}
+
+		/// <summary>Static getter for Meetup Url</summary>
+		public static string GetMeetupUrl(IEventControls that) { return that.GetPropertyValue<string>("meetupUrl"); }
+
+		///<summary>
+		/// Speaker: Choose the speaker for this event
+		///</summary>
+		[ImplementPropertyType("speaker")]
+		public IPublishedContent Speaker
+		{
+			get { return GetSpeaker(this); }
+		}
+
+		/// <summary>Static getter for Speaker</summary>
+		public static IPublishedContent GetSpeaker(IEventControls that) { return that.GetPropertyValue<IPublishedContent>("speaker"); }
+
+		///<summary>
+		/// Start Date Time: Enter the start date and time
+		///</summary>
+		[ImplementPropertyType("startDateTime")]
+		public DateTime StartDateTime
+		{
+			get { return GetStartDateTime(this); }
+		}
+
+		/// <summary>Static getter for Start Date Time</summary>
+		public static DateTime GetStartDateTime(IEventControls that) { return that.GetPropertyValue<DateTime>("startDateTime"); }
+	}
+
+	/// <summary>Event</summary>
+	[PublishedContentModel("event")]
+	public partial class Event : PublishedContentModel, IEventControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "event";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public Event(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Event, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// End Date Time: Enter the end date time
+		///</summary>
+		[ImplementPropertyType("endDateTime")]
+		public DateTime EndDateTime
+		{
+			get { return Umbraco.Web.PublishedContentModels.EventControls.GetEndDateTime(this); }
+		}
+
+		///<summary>
+		/// Meeting Content: Enter the content for the meeting
+		///</summary>
+		[ImplementPropertyType("meetingContent")]
+		public IHtmlString MeetingContent
+		{
+			get { return Umbraco.Web.PublishedContentModels.EventControls.GetMeetingContent(this); }
+		}
+
+		///<summary>
+		/// Meetup Url: Enter the url for the event on meetup
+		///</summary>
+		[ImplementPropertyType("meetupUrl")]
+		public string MeetupUrl
+		{
+			get { return Umbraco.Web.PublishedContentModels.EventControls.GetMeetupUrl(this); }
+		}
+
+		///<summary>
+		/// Speaker: Choose the speaker for this event
+		///</summary>
+		[ImplementPropertyType("speaker")]
+		public IPublishedContent Speaker
+		{
+			get { return Umbraco.Web.PublishedContentModels.EventControls.GetSpeaker(this); }
+		}
+
+		///<summary>
+		/// Start Date Time: Enter the start date and time
+		///</summary>
+		[ImplementPropertyType("startDateTime")]
+		public DateTime StartDateTime
+		{
+			get { return Umbraco.Web.PublishedContentModels.EventControls.GetStartDateTime(this); }
+		}
+	}
+
+	/// <summary>Sponsor Item</summary>
+	[PublishedContentModel("sponsorItem")]
+	public partial class SponsorItem : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "sponsorItem";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public SponsorItem(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<SponsorItem, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Image: Choose the image for this sponsor
+		///</summary>
+		[ImplementPropertyType("image")]
+		public IPublishedContent Image
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("image"); }
+		}
+
+		///<summary>
+		/// Sponsor Name: Enter the name of the sponsor
+		///</summary>
+		[ImplementPropertyType("sponsorName")]
+		public string SponsorName
+		{
+			get { return this.GetPropertyValue<string>("sponsorName"); }
+		}
+
+		///<summary>
+		/// Sponsor Url: Enter the url for the sponsor
+		///</summary>
+		[ImplementPropertyType("sponsorUrl")]
+		public string SponsorUrl
+		{
+			get { return this.GetPropertyValue<string>("sponsorUrl"); }
+		}
+	}
+
+	/// <summary>Speaker List</summary>
+	[PublishedContentModel("speakerList")]
+	public partial class SpeakerList : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "speakerList";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public SpeakerList(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<SpeakerList, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+	}
+
+	/// <summary>Event List</summary>
+	[PublishedContentModel("eventList")]
+	public partial class EventList : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "eventList";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public EventList(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<EventList, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
 	}
 
 	/// <summary>Folder</summary>
