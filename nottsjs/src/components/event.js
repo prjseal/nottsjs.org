@@ -62,7 +62,7 @@ class EventItem extends Component {
 
   formatDate(dateTime)
   {
-    return dateTime.getMonth()+1 + "/" + dateTime.getDate() + "/" + dateTime.getYear();
+    return dateTime.getMonth() + "/" + dateTime.getDate() + "/" + dateTime.getYear();
   }
 }
 

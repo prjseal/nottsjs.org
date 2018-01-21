@@ -57,3 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
+/umbraco/NottsJS.Web/App_Data/umbraco.config
+/umbraco/NottsJS.Web/App_Data/cache
+/umbraco/NottsJS.Web/App_Data/Logs
+/umbraco/NottsJS.Web/App_Data/Models
+/umbraco/NottsJS.Web/App_Data/NuGetBackup
+/umbraco/NottsJS.Web/App_Data/packages
+/umbraco/NottsJS.Web/App_Data/TEMP
