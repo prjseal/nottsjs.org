@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "44c7aa4b12a08136")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.5")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "554ad2e8e78380e6")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.6")]
 
 
 // FILE: models.generated.cs
@@ -320,9 +320,6 @@ namespace Umbraco.Web.PublishedContentModels
 		/// <summary>Meetup Url</summary>
 		string MeetupUrl { get; }
 
-		/// <summary>Speaker</summary>
-		IPublishedContent Speaker { get; }
-
 		/// <summary>Start Date Time</summary>
 		DateTime StartDateTime { get; }
 	}
@@ -389,18 +386,6 @@ namespace Umbraco.Web.PublishedContentModels
 		public static string GetMeetupUrl(IEventControls that) { return that.GetPropertyValue<string>("meetupUrl"); }
 
 		///<summary>
-		/// Speaker: Choose the speaker for this event
-		///</summary>
-		[ImplementPropertyType("speaker")]
-		public IPublishedContent Speaker
-		{
-			get { return GetSpeaker(this); }
-		}
-
-		/// <summary>Static getter for Speaker</summary>
-		public static IPublishedContent GetSpeaker(IEventControls that) { return that.GetPropertyValue<IPublishedContent>("speaker"); }
-
-		///<summary>
 		/// Start Date Time: Enter the start date and time
 		///</summary>
 		[ImplementPropertyType("startDateTime")]
@@ -463,15 +448,6 @@ namespace Umbraco.Web.PublishedContentModels
 		public string MeetupUrl
 		{
 			get { return Umbraco.Web.PublishedContentModels.EventControls.GetMeetupUrl(this); }
-		}
-
-		///<summary>
-		/// Speaker: Choose the speaker for this event
-		///</summary>
-		[ImplementPropertyType("speaker")]
-		public IPublishedContent Speaker
-		{
-			get { return Umbraco.Web.PublishedContentModels.EventControls.GetSpeaker(this); }
 		}
 
 		///<summary>

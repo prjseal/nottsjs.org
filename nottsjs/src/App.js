@@ -8,11 +8,9 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      site: '',
       name: '',
       links: [],
-      nodeid: 0,
-      content: {},
+      nodeid: 0
     }
   }
 
@@ -25,11 +23,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Home content={this.state.content} />
-        {(Object.keys(this.state.links).map((item) => {
-          debugger
+        <Home name={this.state.name} nodeid={this.state.nodeid} />
+        {/* {(Object.keys(this.state.links).map((item) => {
           return (<Link src={this.state.links[item].href} caption='link text' />)
-        }))}
+        }))} */}
       </div>
     );
   }
@@ -79,7 +76,6 @@ class App extends Component {
       return response.json();
     }).then((data) => {
       this.setState({
-        content: data._embedded.content["0"],
         name: data._embedded.content["0"].name,
         links: data._links,
         nodeid: data._embedded.content["0"].id,
