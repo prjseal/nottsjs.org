@@ -22,7 +22,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <Home name={this.state.name} nodeid={this.state.nodeid} />
         {/* {(Object.keys(this.state.links).map((item) => {
           return (<Link src={this.state.links[item].href} caption='link text' />)
