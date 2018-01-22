@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
 import './App.css';
 import Home from './components/home.js';
-import Link from './components/link.js';
 
 class App extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
-      links: [],
-      nodeid: 0
+      content: [],
     }
   }
 
   componentDidMount() {
     this.getAccessToken('setup@codeshare.co.uk', 'setup@codeshare.co.uk').then((token) => {
-      this.getContent(token);
+      this.getHomeContent(token);
     })
   }
 
   render() {
     return (
       <div>
-        <Home name={this.state.name} nodeid={this.state.nodeid} />
-        {/* {(Object.keys(this.state.links).map((item) => {
-          return (<Link src={this.state.links[item].href} caption='link text' />)
-        }))} */}
+        <Home data={this.state.content} />
       </div>
     );
   }
@@ -64,7 +58,7 @@ class App extends Component {
     }).join('&');
   }
 
-  getContent(token) {
+  getHomeContent(token) {
     fetch('http://nottsjs.localtest.me/umbraco/rest/v1/content', {
       method: 'get',
       headers: {
@@ -76,9 +70,7 @@ class App extends Component {
       return response.json();
     }).then((data) => {
       this.setState({
-        name: data._embedded.content["0"].name,
-        links: data._links,
-        nodeid: data._embedded.content["0"].id,
+        content: data._embedded.content["0"].properties,
       });
     });
   }

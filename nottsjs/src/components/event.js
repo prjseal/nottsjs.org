@@ -48,8 +48,8 @@ class EventItem extends Component {
                   </div>
                 </div>
                 <div class="col s12 m8 l9">
-                  <h5 class="title">Chris Kemp</h5>
-                  <p>{this.props.data.properties["bio"]}</p>
+                  <h5 class="title">{this.props.data.properties["speakerName"]}</h5>
+                  {renderHTML(this.props.data.properties["bio"])}
                 </div>
               </div>
 
