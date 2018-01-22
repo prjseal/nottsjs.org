@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import renderHTML from 'react-render-html';
+import moment from 'moment';
 
 class EventItem extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class EventItem extends Component {
         <div className="col s12">
           <div className="card-panel talk">
             <h3 class="header light">{this.props.data.name}</h3>
-            <h6 class="light">{this.formatDate(new Date('2017-11-14T18:30:00Z'))}</h6>
+            <p>{moment('2017-11-14T18:30:00Z').format('dddd, MMMM Do YYYY, H:mm')}</p>
+            {/* <h6 class="light">{this.formatDate(new Date('2017-11-14T18:30:00Z'))}</h6> */}
             <a class="btn waves-effect waves-light yellow black-text top-button" href={this.props.data.properties["meetupUrl"]}>RSVP on Meetup<i class="material-icons left">reply</i></a>
               <a class="btn waves-effect waves-light yellow black-text top-button" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;text=NottsJS+November+2017&amp;dates=20171114T183000Z/20171114T210000Z&amp;location=JH,+34a+Stoney+Street,+Nottingham,+NG1+1NB">Add to Google Calendar<i class="material-icons left">date_range</i></a>
             {renderHTML(this.props.data.properties["meetingContent"])}

@@ -5,7 +5,6 @@ import App from './App';
 import EventList from './components/eventlist.js'
 import registerServiceWorker from './registerServiceWorker';
 
-//ReactDOM.render(<EventList />, document.getElementById('events'));
 ReactDOM.render(<App />, document.getElementById('root'));
 
 registerServiceWorker();
