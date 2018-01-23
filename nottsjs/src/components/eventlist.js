@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventItem from './event.js';
+import {getAccessToken} from '../umbraco-api.js'
 
 class EventList extends Component {
 	constructor(props) {
@@ -12,16 +13,22 @@ class EventList extends Component {
 		}
 	}
 
-
 	componentDidMount() {
-		this.getAccessToken('setup@codeshare.co.uk', 'setup@codeshare.co.uk').then((token) => {
-			this.getChildren(token);
+		getAccessToken('setup@codeshare.co.uk', 'setup@codeshare.co.uk').then((token) => {
+			this.getEvents(token);
 		})
 	}
 
 	render() {
 		return (
-			<div>
+			<div className="col s12 m8 l9 left-align">
+				<div className="row">
+				<div className="col s12">
+					<h3 className="header">Next event: Tuesday, November 14, 2017</h3>
+					<h5 className="header light">18:30 to 21:00</h5>
+				</div>
+				</div>
+
 				{this.state.content.map((item) => {
 					debugger
 					return (<EventItem data={item} />)
@@ -30,40 +37,7 @@ class EventList extends Component {
 		);
 	}
 
-	getAccessToken(username, password) {
-		const postData = {
-			grant_type: 'password',
-			username,
-			password,
-		};
-
-		const authUrl = 'http://nottsjs.localtest.me/umbraco/oauth/token';
-
-		return new Promise((resolve, reject) => {
-			return fetch(authUrl, {
-				method: 'post',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/x-www-form-urlencoded',
-				},
-				body: this.encodePostData(postData),
-			}).then((response) => {
-				return response.json();
-			})
-				.then((data) => {
-					return resolve(data.access_token);
-				});
-		});
-	}
-
-	encodePostData(postData) {
-		if (!postData) throw new Error('No post data present.');
-		return Object.keys(postData).map((key) => {
-			return `${encodeURIComponent(key)}=${encodeURIComponent(postData[key])}`;
-		}).join('&');
-	}
-
-	getChildren(token, nodeid) {
+	getEvents(token, nodeid) {
 		fetch('http://nottsjs.localtest.me/umbraco/rest/v1/content/1073/children', {
 			method: 'get',
 			headers: {
