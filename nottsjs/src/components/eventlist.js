@@ -6,15 +6,12 @@ class EventList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: '',
-			links: [],
-			nodeid: 0,
 			content: [],
 		}
 	}
 
 	componentDidMount() {
-		getAccessToken('setup@codeshare.co.uk', 'setup@codeshare.co.uk').then((token) => {
+		getAccessToken().then((token) => {
 			this.getEvents(token);
 		})
 	}
@@ -30,7 +27,6 @@ class EventList extends Component {
 				</div>
 
 				{this.state.content.map((item) => {
-					debugger
 					return (<EventItem data={item} />)
 				})}
 			</div>

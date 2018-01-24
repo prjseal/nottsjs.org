@@ -8,7 +8,6 @@ class EventItem extends Component {
   }
 
   render() {
-    debugger
     return (
       <div className="row">
         <div className="col s12">

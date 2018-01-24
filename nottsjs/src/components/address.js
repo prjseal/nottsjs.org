@@ -7,17 +7,24 @@ class Address extends Component {
         super(props);
     }
     render() {
-        return (
-            <div className="row">
-              <div className="col s10 offset-s1">
-                <a className="black-text" href="https://goo.gl/maps/CANG94ZcpaL2">
-                  <address>
-                    <i className="material-icons valign-middle">place</i>34a Stoney Street,<br />Nottingham,<br />NG1 1NB
-                    </address>
-                </a>
-              </div>
-            </div>
-        )
+        if (this.props.data["address"]) {
+            return (
+                <div className="row">
+                    <div className="col s10 offset-s1">
+                        <a className="black-text" href="https://goo.gl/maps/CANG94ZcpaL2">
+                            <address>
+                                <i className="material-icons valign-middle">place</i>{renderHTML(this.props.data["address"].replace("<p>", "").replace("</p>", ""))}
+                            </address>
+                        </a>
+                    </div>
+                </div>
+            )
+        }
+        else {
+            return (
+                <span>Loading...</span>
+            );
+        }
     };
 }
 

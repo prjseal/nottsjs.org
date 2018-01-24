@@ -1,4 +1,5 @@
-export const getAccessToken = (username, password) => {
+export const getAccessToken = () => {
+    var username = 'setup@codeshare.co.uk', password = 'setup@codeshare.co.uk';
     const postData = {
         grant_type: 'password',
         username,
@@ -29,32 +30,4 @@ export const encodePostData = (postData) => {
     return Object.keys(postData).map((key) => {
         return `${encodeURIComponent(key)}=${encodeURIComponent(postData[key])}`;
     }).join('&');
-}
-
-export const getEvents = (token, nodeid) => {
-    fetch('http://nottsjs.localtest.me/umbraco/rest/v1/content/1073/children', {
-        method: 'get',
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        }
-    }).then((response) => {
-        return response.json();
-    }).then((data) => {
-        this.setState({
-            content: data._embedded.content,
-        });
-    });
-}
-
-export const getHomeContent = (token) => {
-    return fetch('http://nottsjs.localtest.me/umbraco/rest/v1/content', {
-        method: 'get',
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        }
-    });
 }

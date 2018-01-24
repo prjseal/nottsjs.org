@@ -7,7 +7,6 @@ class Footer extends Component {
 		super(props);
 	}
 	render() {
-		debugger
 		return (
         <footer class=" blue-grey darken-2">
           <div class="container">

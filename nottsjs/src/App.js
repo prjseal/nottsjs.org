@@ -16,6 +16,7 @@ class App extends Component {
     super(props)
     this.state = {
       content: [],
+      sponsors: [],
     }
   }
 
@@ -33,8 +34,8 @@ class App extends Component {
           <div className="col s12 m4 l3 center-align">
             <Logo />
             <Address data={this.state.content} />
-            <Sponsors data={this.state.content} />
-            <p className="light">Would you like to sponsor us? <a className="black-text" href="/cdn-cgi/l/email-protection#d0b3bfbea4b1b3a490bebfa4a4a3baa3febfa2b7"><span className="__cf_email__" data-cfemail="9ffcf0f1ebfefcebdff1f0ebebecf5ecb1f0edf8">[email&#160;protected]</span></a></p>
+            <Sponsors data={this.state.sponsors} />
+            <p className="light">Would you like to sponsor us? <a class="black-text" href="mailto:contact@nottsjs.org">contact@nottsjs.org</a></p>
           </div>
           <EventList />
         </div>
@@ -57,8 +58,10 @@ class App extends Component {
     }).then((response) => {
       return response.json();
     }).then((data) => {
+      debugger
       this.setState({
         content: data._embedded.content["0"].properties,
+        sponsors: JSON.parse(data._embedded.content["0"].properties.sponsors),
       });
     });
   }
