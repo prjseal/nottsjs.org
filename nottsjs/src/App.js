@@ -29,17 +29,19 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col s12 m4 l3 center-align">
-            <Logo />
-            <Address data={this.state.content} />
-            <Sponsors data={this.state.sponsors} />
-            <p className="light">Would you like to sponsor us? <a class="black-text" href="mailto:contact@nottsjs.org">contact@nottsjs.org</a></p>
+      <div>
+        <div className="container">
+          <div className="row">
+            <div className="col s12 m4 l3 center-align">
+              <Logo />
+              <Address data={this.state.content} />
+              <Sponsors data={this.state.sponsors} />
+              <p className="light">Would you like to sponsor us? <a class="black-text" href="mailto:contact@nottsjs.org">contact@nottsjs.org</a></p>
+            </div>
+            <EventList />
           </div>
-          <EventList />
+          {renderHTML(String(this.state.content["codeOfConductMessage"]))}
         </div>
-        {renderHTML(String(this.state.content["codeOfConductMessage"]))}
         <Instructions data={this.state.content} />
         <Footer data={this.state.content} />
         <Popup />

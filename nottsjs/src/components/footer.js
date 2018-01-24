@@ -21,7 +21,7 @@ class Footer extends Component {
               <div class="col s6 m4 offset-m3">
                 <h5 class="white-text">Links</h5>
                 <ul>
-                  <li><a class="white-text" href="/cdn-cgi/l/email-protection#2c4f4342584d4f586c424358585f465f02435e4b135f594e46494f5811624358585f667f076f4342584d4f58">Contact</a></li>
+                  <li><a class="white-text" href="mailto:contact@nottsjs.org">Contact</a></li>
                   <li><a class="white-text" href="//eepurl.com/bvVtwb">Newsletter</a></li>
                   <li><a class="white-text" href="//github.com/nottsjs/speakers">Submit a Talk</a></li>
                   <li><a class="white-text" href="codeofconduct.html">Code of Conduct</a></li>

@@ -17,7 +17,7 @@ class EventItem extends Component {
             {/* <h6 class="light">{this.formatDate(new Date('2017-11-14T18:30:00Z'))}</h6> */}
             <a class="btn waves-effect waves-light yellow black-text top-button" href={this.props.data.properties["meetupUrl"]}>RSVP on Meetup<i class="material-icons left">reply</i></a>
               <a class="btn waves-effect waves-light yellow black-text top-button" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;text=NottsJS+November+2017&amp;dates=20171114T183000Z/20171114T210000Z&amp;location=JH,+34a+Stoney+Street,+Nottingham,+NG1+1NB">Add to Google Calendar<i class="material-icons left">date_range</i></a>
-            {renderHTML(this.props.data.properties["meetingContent"])}
+            {renderHTML(this.props.data.properties["meetingContent"].replace("/media", "http://nottsjs.localtest.me/media"))}
             <hr/>
               <div class="row profile">   
                 <div class="col s12 m4 l3">
