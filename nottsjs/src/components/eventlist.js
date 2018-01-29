@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EventItem from './event.js';
-import {getAccessToken} from '../umbraco-api.js'
+import { getAccessToken } from '../umbraco-api.js'
+import moment from 'moment';
 
 class EventList extends Component {
 	constructor(props) {
@@ -17,20 +18,32 @@ class EventList extends Component {
 	}
 
 	render() {
-		return (
-			<div className="col s12 m8 l9 left-align">
-				<div className="row">
-				<div className="col s12">
-					<h3 className="header">Next event: Tuesday, November 14, 2017</h3>
-					<h5 className="header light">18:30 to 21:00</h5>
+		if (this.state) {
+			return (
+				<div className="col s12 m8 l9 left-align">
+					{this.state.content.map((item, index) => {
+						debugger
+						if(index == 0)
+						{
+							return(
+								<div className="row">
+									<div className="col s12">
+										<h3 className="header">Next event: {moment(item.properties["startDateTime"]).format('dddd, MMMM D, YYYY')}</h3>
+										<h5 className="header light">{moment(item.properties["startDateTime"]).format('HH:mm')} to {moment(item.properties["endDateTime"]).format('HH:mm')}</h5>
+									</div>
+								</div>
+							)							
+						}
+						return (<EventItem data={item} />)
+					})}
 				</div>
-				</div>
-
-				{this.state.content.map((item) => {
-					return (<EventItem data={item} />)
-				})}
-			</div>
-		);
+			);
+		}
+		else {
+			return(
+				<span>Loading...</span>
+			);
+		}
 	}
 
 	getEvents(token, nodeid) {

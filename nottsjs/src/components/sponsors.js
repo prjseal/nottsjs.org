@@ -19,6 +19,9 @@ class Sponsors extends Component {
                     </div>
                     );
                   })}
+                  <div class="col s12">
+                    <a class="btn-large waves-effect waves-light modal-trigger red darken-3 scholarship-program-btn" href="#scholarship-fund-modal">Scholarship program</a>
+                  </div>
               </div>
           );
         }

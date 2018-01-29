@@ -44,7 +44,7 @@ class App extends Component {
         </div>
         <Instructions data={this.state.content} />
         <Footer data={this.state.content} />
-        <Popup />
+        <Popup data={this.state.content} />
       </div>
     );
   }
