@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventItem from './event.js';
+import NextEvent from './nextEvent.js';
 import { getAccessToken } from '../umbraco-api.js'
 import moment from 'moment';
 
@@ -21,19 +22,8 @@ class EventList extends Component {
 		if (this.state) {
 			return (
 				<div className="col s12 m8 l9 left-align">
+					<NextEvent data={this.state.content[0]} />
 					{this.state.content.map((item, index) => {
-						debugger
-						if(index == 0)
-						{
-							return(
-								<div className="row">
-									<div className="col s12">
-										<h3 className="header">Next event: {moment(item.properties["startDateTime"]).format('dddd, MMMM D, YYYY')}</h3>
-										<h5 className="header light">{moment(item.properties["startDateTime"]).format('HH:mm')} to {moment(item.properties["endDateTime"]).format('HH:mm')}</h5>
-									</div>
-								</div>
-							)							
-						}
 						return (<EventItem data={item} />)
 					})}
 				</div>
